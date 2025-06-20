@@ -90,7 +90,9 @@ sudo ./splunk add monitor /var/log/syslog
 index=* host=<kali/ubuntu hostname>
 4 You should see logs forwarded from Kali → Ubuntu → Splunk
 
-🔐 Use Cases
+---
+
+##🔐 Use Cases
 🔍 Threat Detection in SOCs
 
 📡 Log Collection for SIEM Pipelines
@@ -107,6 +109,8 @@ index=* host=<kali/ubuntu hostname>
 -man rsyslog.conf
 
 -Splunk Docs
+
+---
 
 👨‍💻 Author
 Faizanullah Syed
