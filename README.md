@@ -102,13 +102,13 @@ index=* host=<kali/ubuntu hostname>
 🛠️ Blue Team Lab Setup for Cybersecurity Training
 
 📚 References
--rsyslog.com
+rsyslog.com
 
--Splunk UF Docs
+Splunk UF Docs
 
--man rsyslog.conf
+man rsyslog.conf
 
--Splunk Docs
+Splunk Docs
 
 
 ---
