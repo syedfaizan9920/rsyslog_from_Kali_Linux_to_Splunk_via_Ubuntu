@@ -1,0 +1,1 @@
+# rsyslog_from_Kali_Linux_to_Splunk_via_Ubuntu
