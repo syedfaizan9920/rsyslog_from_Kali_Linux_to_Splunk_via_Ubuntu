@@ -4,12 +4,14 @@ A complete guide to setting up **multi-hop log forwarding** using `rsyslog` — 
 
 ---
 
-# 🧭 Architecture Overview
+## 🧭 Architecture Overview
+
 Kali Linux (Log Source)
 ↓
 Ubuntu Server (Forwarder)
 ↓
 Splunk Enterprise Server (Collector)
+
 
 ---
 
@@ -25,19 +27,19 @@ Splunk Enterprise Server (Collector)
 
 ## ⚙️ Technologies Used
 
-- 🐧 Kali Linux & Ubuntu Server
-- 🔁 rsyslog (multi-hop config)
-- 📡 Splunk Universal Forwarder (UF)
-- 📊 Splunk Enterprise Server
+- 🐧 Kali Linux & Ubuntu Server  
+- 🔁 rsyslog (multi-hop config)  
+- 📡 Splunk Universal Forwarder (UF)  
+- 📊 Splunk Enterprise Server  
 - 🔐 TCP/UDP protocols (port 514 & 9997)
 
 ---
 
 ## 📦 Prerequisites
 
-- Linux systems (Kali, Ubuntu)
-- Splunk Enterprise installed
-- Ports 514 (rsyslog) and 9997 (Splunk) open
+- Linux systems (Kali, Ubuntu)  
+- Splunk Enterprise installed  
+- Ports 514 (rsyslog) and 9997 (Splunk) open  
 - `rsyslog` and Splunk UF installed
 
 ---
@@ -52,25 +54,23 @@ sudo apt update
 sudo apt install rsyslog -y
 
 🔁 Step 2: Configure Splunk Server to Receive Logs
+
 sudo nano /etc/rsyslog.conf
-module(load="imudp") 
+Enable TCP & UDP:
+module(load="imudp")
 input(type="imudp" port="514")
 
-module(load="imtcp") 
+module(load="imtcp")
 input(type="imtcp" port="514")
-sudo systemctl restart rsyslog
 
 🌐 Step 3: Forward Logs from Ubuntu → Splunk
-On Ubuntu:
-*.* @<SPLUNK_SERVER_IP>:514
-sudo systemctl restart rsyslog
+*.* @@<SPLUNK_SERVER_IP>:514
 
-🛰️ Step 4: Forward Logs from Kali → Ubuntu
-On Kali:
-*.* @<UBUNTU_FORWARDER_IP>:514
+Restart:
 sudo systemctl restart rsyslog
 
 📥 Step 5: Install Splunk Universal Forwarder on Ubuntu
+
 wget -O splunkforwarder.deb "https://download.splunk.com/products/universalforwarder/releases/9.2.0/linux/splunkforwarder-9.2.0-xxxxxxx.deb"
 sudo dpkg -i splunkforwarder.deb
 cd /opt/splunkforwarder/bin
@@ -78,21 +78,23 @@ sudo ./splunk start --accept-license
 sudo ./splunk enable boot-start
 
 🔗 Step 6: Add Forwarding & Monitoring
+
 sudo ./splunk add forward-server <SPLUNK_IP>:9997
 sudo ./splunk add monitor /var/log/syslog
 
-🔍 Validate Logs in Splunk
-1 Log in to Splunk Web UI
+🔍 Step 7: Validate Logs in Splunk
+Log in to Splunk Web UI
 
-2 Go to Search & Reporting
+Go to Search & Reporting
 
-3 Run:
+Run this query:
 index=* host=<kali/ubuntu hostname>
-4 You should see logs forwarded from Kali → Ubuntu → Splunk
 
----
+✅ You should see logs forwarded from Kali → Ubuntu → Splunk
 
-##🔐 Use Cases
+```
+
+🔐 Use Cases
 🔍 Threat Detection in SOCs
 
 📡 Log Collection for SIEM Pipelines
@@ -100,6 +102,8 @@ index=* host=<kali/ubuntu hostname>
 💾 Centralized Monitoring in Hybrid Infrastructure
 
 🛠️ Blue Team Lab Setup for Cybersecurity Training
+
+---
 
 📚 References
 rsyslog.com
@@ -110,16 +114,14 @@ man rsyslog.conf
 
 Splunk Docs
 
-
 ---
 
-## 👤 Author
+## 🧑‍💻 Author
 
 **Faizanullah Syed**  
-💼 SOC Analyst | 🛡️ Cybersecurity Enthusiast  
-🌐 [unmaskcyber.com](https://unmaskcyber.com)  
+💼 SOC Analyst   |   🛡️ Cybersecurity Enthusiast  
+🌐 (https://unmaskcyber.com)
 
----
 
 
 
