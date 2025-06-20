@@ -110,13 +110,6 @@ index=* host=<kali/ubuntu hostname>
 
 -Splunk Docs
 
----
-
-👨‍💻 Author
-Faizanullah Syed
-💼 SOC Analyst | 🛡️ Cybersecurity Enthusiast
-🌐 unmaskcyber.com
-
 
 
 
